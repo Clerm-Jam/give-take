@@ -10,7 +10,7 @@ import { SimplebtnComponent } from '../../shared/components/simplebtn/simplebtn.
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  onSelectUsser = true;
+  onSelectUsser = false;
   isHacker = false;
 
   
