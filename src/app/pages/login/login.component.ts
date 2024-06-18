@@ -11,6 +11,7 @@ import { SimplebtnComponent } from '../../shared/components/simplebtn/simplebtn.
 })
 export class LoginComponent {
   onSelectUsser = true;
+  isHacker = false;
 
   
 }

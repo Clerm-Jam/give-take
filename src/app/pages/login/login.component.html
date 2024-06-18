@@ -1,26 +1,34 @@
 <div class="w-full h-full bg-green flex items-center justify-center">
-    <app-windows class="">
+    <app-windows class="flex">
         @if (onSelectUsser) {
-        <div class="bg-grey p-2 flex justify-between items-center mb-2">
+        <div class="mb-2 bg-grey p-2 flex justify-between items-center">
             <span>Juan</span>
             <app-simplebtn />
         </div>
-        <div class="bg-grey p-2 flex justify-between items-center mb-2">
-            <span>Juan</span>
+        <div class="mb-2 bg-grey p-2 flex justify-between items-center ">
+            <span>Player</span>
             <app-simplebtn />
         </div>
-        <div class="bg-grey p-2 flex justify-between items-center mb-2">
-            <span>Juan</span>
+        <div class="mb-2 bg-grey p-2 flex justify-between items-center">
+            <span>TheBoss</span>
             <app-simplebtn />
         </div>
-        <div class="bg-grey p-2 flex justify-between items-center mb-2">
-            <span>Juan</span>
-            <app-simplebtn />
-        </div>
-        <div class="bg-grey p-2 flex justify-between items-center mb-2">
-            <span>Juan</span>
-            <app-simplebtn />
-        </div>
+        @if (isHacker) {
+            <div class="mb-2 bg-grey p-2 flex justify-between items-center">
+                <span>darkesMystery22</span>
+                <app-simplebtn />
+            </div>
+        }
+        }
+        @if (!onSelectUsser) {
+            <app-windows class="flex flex-row">
+                <span>Pasword:</span>
+                <br class="mb-2">
+                <div class="flex">
+                    <input class="bg-grey py-1 px-1 w-full focus:outline-none" type="text">
+                    <app-simplebtn />
+                </div>
+            </app-windows>
         }
     </app-windows>
 </div>
