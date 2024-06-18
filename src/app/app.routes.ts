@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { GameComponent } from './pages/game/game.component';
 import { LoginComponent } from './pages/login/login.component';
-import { SandboxComponent } from './pages/sandbox/sandbox.component';
+// import { SandboxComponent } from './pages/sandbox/sandbox.component';
 
 export const routes: Routes = [
   {
@@ -12,8 +12,8 @@ export const routes: Routes = [
     path: 'game',
     component: GameComponent,
   },
-  {
-    path: 'sandbox',
-    component: SandboxComponent,
-  }
+  // {
+  //   path: 'sandbox',
+  //   component: SandboxComponent,
+  // }
 ];
