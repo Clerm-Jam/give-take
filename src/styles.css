@@ -7,7 +7,7 @@
     font-family: monospace;
 }
 
-html {
-    background-color: #007e85ff;
-    margin: 100px;
+body {
+    width: 100vw;
+    height: 100vh;
 }

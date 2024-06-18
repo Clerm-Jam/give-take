@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './simplebtn.component.html',
-  styleUrl: './simplebtn.component.css'
 })
 export class SimplebtnComponent {
 

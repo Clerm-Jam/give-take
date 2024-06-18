@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './windows.component.html',
-  styleUrl: './windows.component.css'
 })
 export class WindowsComponent {
 
