@@ -36,8 +36,12 @@ export class LoginComponent {
 
   goBack() {
     this.onSelectUser = true;
-    this.winTitle = 'Login to work'
+    this.winTitle = 'Login to work';
   }
 
-
+  handleinputChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const passwordLength = input.value.length;
+    input.value = '*'.repeat(passwordLength);
+  }
 }

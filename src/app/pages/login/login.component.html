@@ -18,7 +18,7 @@
                 <span>Pasword:</span>
                 <br class="mb-2">
                 <div class="flex mb-20">
-                    <input class="bg-grey py-1 px-1 w-full focus:outline-none" type="text">
+                    <input class="bg-grey py-1 px-1 w-full focus:outline-none" type="text" (input)="handleinputChange($event)">
                     <app-simplebtn [text]="'Login'" />
                 </div>
                 <app-simplebtn (click)="goBack()" [text]="'Go back'" />
