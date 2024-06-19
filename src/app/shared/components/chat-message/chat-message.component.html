@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-y-1" [ngClass]="{'items-end': message.me, 'items-start': !message.me}">
   <div class="flex gap-1 items-center">
-    <div class="w-6 h-6 bg-yellow flex justify-center items-center">{{message.from.icon}}</div>
-    <div [ngClass]="{'text-end': message.me, 'text-start': !message.me}">{{message.from.name}}</div>
+    <div class="w-6 h-6 bg-yellow flex justify-center items-center">{{message.from_icon}}</div>
+    <div [ngClass]="{'text-end': message.me, 'text-start': !message.me}">{{message.from_name}}</div>
   </div>
   {{message.content}}
 </div>

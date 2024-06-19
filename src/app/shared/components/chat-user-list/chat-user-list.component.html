@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-y-4">
-  <div *ngFor="let user of users">
-    <app-chat-profile-card [name]="user.name" [icon]="user.icon" [online]="user.online" />
+  <div *ngFor="let user of onlineUsers">
+    <app-chat-profile-card [name]="user.name" [icon]="user.icon" />
   </div>
   <app-chat-profile-card name="Genius (me)" icon=":3" [online]="true" [action_disabled]="true">
   </app-chat-profile-card>

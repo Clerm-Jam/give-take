@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MESSAGE_ACTIONS } from '../../../constants';
 
 @Component({
   selector: 'app-simplebtn',
@@ -9,8 +10,16 @@ import { Component } from '@angular/core';
   templateUrl: './simplebtn.component.html',
 })
 export class SimplebtnComponent {
-  text: string = "Button";
-  action: Function = () => {};
-  parameters: (string|number)[] = [];
+  text: string = 'Button';
+  action: Function | null = null;
+  parameters: (string | number)[] = [];
   full: boolean = false;
+
+  onClick() {
+    if (this.action) {
+      this.action(...this.parameters)
+    } else {
+      //pass
+    }
+  }
 }

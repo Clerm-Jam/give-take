@@ -1,29 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, WritableSignal, inject } from '@angular/core';
 import { ChatProfileCardComponent } from '../chat-profile-card/chat-profile-card.component';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../models/user';
+import { UserInfo } from '../../../models/userInfo';
 import { ChatActionsPanelComponent } from '../chat-actions-panel/chat-actions-panel.component';
 import { Message } from '../../../models/message';
 import { ChatMessageComponent } from '../chat-message/chat-message.component';
+import { FlatMessage } from '../../../models/flatMessage';
+import { Conversation } from '../../../models/coversation';
+import { UserService } from '../../../services/userService';
+import { UserDatabase } from '../../../models/userDatabase';
+import { CODENAME } from '../../../constants';
+import { MessageAction } from '../../../models/messageAction';
 
 @Component({
   selector: 'app-chat-conversation',
   standalone: true,
-  imports: [ChatProfileCardComponent, CommonModule, ChatActionsPanelComponent, ChatMessageComponent],
+  imports: [
+    ChatProfileCardComponent,
+    CommonModule,
+    ChatActionsPanelComponent,
+    ChatMessageComponent,
+  ],
+  inputs: ['conversation', 'user_me', 'user_other'],
   templateUrl: './chat-conversation.component.html',
-  styleUrl: './chat-conversation.component.css'
+  styleUrl: './chat-conversation.component.css',
 })
-export class ChatConversationComponent {
-  user_me: User = { name: "Genius (me)", icon: "=3", online: true};
-  user_other: User = { name: "Juan", icon: "=)", online: true};
-  messages: Message[] = [
-    { from: this.user_me, content: "Hello, how are you?", me: true},
-    { from: this.user_other, content: "Fine, thanks!", me: false},
-    { from: this.user_me, content: "Good to hear that!", me: true},
-    { from: this.user_other, content: "What about you?", me: false},
-    { from: this.user_me, content: "I'm fine too, thanks!", me: true},
-    { from: this.user_other, content: "Great!", me: false},
-    { from: this.user_me, content: "I have to go now, see you!", me: true},
-    { from: this.user_other, content: "Bye!", me: false}
-  ];
+
+export class ChatConversationComponent implements OnInit {
+  paricipants: UserInfo[] = []
+  conversation: Conversation = {title: "", messages: [], actions: []};
+
+  private userService = inject(UserService);
+
+  users!: WritableSignal<UserDatabase>;
+
+  ngOnInit(): void {
+    this.users = this.userService.getUsers();
+  }
+
+  getUserInfo(codename: CODENAME): UserInfo {
+    return this.userService.getUser(codename).info;
+  }
+
+  getFlatMessages(): FlatMessage[] {
+    return this.conversation.messages.map(message => {
+      const from_info = this.getUserInfo(message.from); 
+      return {
+        content: message.content,
+        from_name: from_info.name,
+        from_icon: from_info.icon,
+        me: message.from == CODENAME.ME
+      };
+    })  
+  }
+  
+  getActions(): MessageAction[] {
+    return this.conversation.actions;
+  }
 }

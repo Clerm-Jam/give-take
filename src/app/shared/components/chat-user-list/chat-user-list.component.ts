@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, WritableSignal, inject } from '@angular/core';
 import { ChatProfileCardComponent } from '../chat-profile-card/chat-profile-card.component';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../models/user';
+import { UserInfo } from '../../../models/userInfo';
 
 @Component({
   selector: 'app-chat-user-list',
   standalone: true,
   imports: [CommonModule, ChatProfileCardComponent],
+  inputs: ['onlineUsers'],
   templateUrl: './chat-user-list.component.html',
-  styleUrl: './chat-user-list.component.css'
+  styleUrl: './chat-user-list.component.css',
 })
 export class ChatUserListComponent {
-  users: User[] = [{ name: "Juan", icon: "=)", online: true}, { name: "TheBoss", icon: ":<", online: true}, { name: "DarknessMystery22", icon: "B)", online: false}];
-  chatting: boolean = false;
+  onlineUsers: UserInfo[] = [];
 }

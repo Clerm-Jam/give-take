@@ -1,7 +1,6 @@
-import { User } from "./user";
+import { CODENAME } from "../constants";
 
 export interface Message {
-  from: User,
-  me: boolean,
+  from: CODENAME,
   content: string,
 }

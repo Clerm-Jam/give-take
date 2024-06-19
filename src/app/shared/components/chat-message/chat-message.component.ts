@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Message } from '../../../models/message';
 import { SimplebtnComponent } from '../simplebtn/simplebtn.component';
 import { CommonModule } from '@angular/common';
+import { CODENAME } from '../../../constants';
+import { FlatMessage } from '../../../models/flatMessage';
 
 @Component({
   selector: 'app-chat-message',
@@ -12,5 +14,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './chat-message.component.css'
 })
 export class ChatMessageComponent {
-  message: Message = { from: { name: "", icon: "", online: false}, content: "", me: false};
+  message: FlatMessage = { content: "", from_name: "", from_icon: "", me: false};
 }
