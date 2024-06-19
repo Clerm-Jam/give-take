@@ -1,6 +1,9 @@
 import { UserInfo } from './models/userInfo';
 
+export const POMODORO_FACTOR = 10;
+
 export const enum DAYS {
+  LOGIN = "LOGIN",
   DAY_ONE = 'day_one',
   DAY_TWO = 'day_two',
   DAY_THREE = 'day_three',
@@ -8,6 +11,7 @@ export const enum DAYS {
   DAY_FIVE = "DAY_FIVE",
   DAY_SIX = "DAY_SIX",
   DAY_SEVEN = "DAY_SEVEN",
+  END = "END",
 }
 
 export const enum CODENAME {
