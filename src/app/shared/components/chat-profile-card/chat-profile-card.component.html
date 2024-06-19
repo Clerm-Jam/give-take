@@ -1,0 +1,9 @@
+<div class="flex justify-between border-4 hover:border-blue border-transparent p-2 -m-2">
+  <div class="flex items-center gap-2">
+    <div class="{{ online ? 'text-ok' : 'text-error' }} border border-grey h-8 w-8 flex justify-center items-center font-bold">{{ icon }}</div>
+    <div class="">{{ name }}</div>
+  </div>
+  <div *ngIf="!action_disabled">
+    <app-simplebtn text="Chat"></app-simplebtn>
+  </div>
+</div>

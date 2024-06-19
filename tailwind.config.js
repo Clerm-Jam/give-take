@@ -11,7 +11,10 @@ module.exports = {
       green: "#007e85ff",
       yellow: "#fafa83ff",
       black: "#000000ff",
-      debug: "#ff0000"
+      debug: "#ff0000",
+      ok: "#00ff00",
+      error: "#ab2929",
+      transparent: "transparent",
     },
   },
   plugins: [],

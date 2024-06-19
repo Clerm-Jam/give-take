@@ -1,0 +1,8 @@
+<app-windows title="PingMe" size_classes="h-[250px] w-[250px]">
+  <div *ngIf="chatting; else user_list">
+    <app-chat-conversation />
+  </div>
+  <ng-template #user_list>
+    <app-chat-user-list />
+  </ng-template>
+</app-windows>
