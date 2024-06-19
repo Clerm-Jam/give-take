@@ -1,0 +1,18 @@
+<div class="h-screen w-screen bg-green">
+    <div class="desktop">
+        <div class="winsContainer">
+            <app-windows [title]="'Virtual studio'" class="vscode min-w-96 max-w-96 w-96">
+                <div>{{ currentText }}</div>
+                <div class="place-self-end h-6 bg-grey" (keydown)="detectKey($event)" tabindex="0"></div>
+                <div class="w-full h-4 bg-blue absolute left-0 bottom-0 flex ali-center">
+                    Errors: {{ errors }}
+                </div>
+            </app-windows>
+            <div class="winsContainer2">
+                <app-windows [title]="'Employees performance tracker'"></app-windows>
+                <app-windows [title]="'Todo App'"></app-windows>
+            </div>
+        </div>
+        <app-toolbar class="" />
+    </div>
+</div>

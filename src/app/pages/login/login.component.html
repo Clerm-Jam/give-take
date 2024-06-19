@@ -1,34 +1,27 @@
 <div class="w-full h-full bg-green flex items-center justify-center">
-    <app-windows class="flex">
-        @if (onSelectUsser) {
-        <div class="mb-2 bg-grey p-2 flex justify-between items-center">
-            <span>Juan</span>
-            <app-simplebtn />
-        </div>
-        <div class="mb-2 bg-grey p-2 flex justify-between items-center ">
-            <span>Player</span>
-            <app-simplebtn />
-        </div>
-        <div class="mb-2 bg-grey p-2 flex justify-between items-center">
-            <span>TheBoss</span>
-            <app-simplebtn />
-        </div>
+    <app-windows [title]="winTitle" class="flex">
+        @if (onSelectUser) {
+            @for (user of users; track $index) {
+                <div class="mb-2 h-12 px-2 w-96 bg-grey flex justify-between items-center group">
+                    <span>{{user.name}}</span>
+                    <app-simplebtn (click)="login(user.name)" [text]="'Login'" class="hidden group-hover:flex"/>
+                </div>
+            }
         @if (isHacker) {
-            <div class="mb-2 bg-grey p-2 flex justify-between items-center">
-                <span>darkesMystery22</span>
-                <app-simplebtn />
+            <div class="mb-2 h-12 px-2 w-96 bg-grey flex justify-between items-center group">
+                <span>Hacker</span>
+                <app-simplebtn [text]="'Login'" class="hidden group-hover:flex"/>
             </div>
+        } 
         }
-        }
-        @if (!onSelectUsser) {
-            <app-windows class="flex flex-row">
+        @if (!onSelectUser) {
                 <span>Pasword:</span>
                 <br class="mb-2">
-                <div class="flex">
-                    <input class="bg-grey py-1 px-1 w-full focus:outline-none" type="text">
-                    <app-simplebtn />
+                <div class="flex mb-20">
+                    <input class="bg-grey py-1 px-1 w-full focus:outline-none" type="text" (input)="handleinputChange($event)">
+                    <app-simplebtn (click)="nextPath()" [text]="'Login'" />
                 </div>
-            </app-windows>
-        }
+                <app-simplebtn (click)="goBack()" [text]="'Go back'" />
+            }
     </app-windows>
 </div>

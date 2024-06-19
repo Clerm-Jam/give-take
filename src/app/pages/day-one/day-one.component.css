@@ -1,0 +1,18 @@
+.desktop {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 48px;
+}
+
+.winsContainer {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.winsContainer2 {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    grid-template-rows: 1fr 1fr;
+}
