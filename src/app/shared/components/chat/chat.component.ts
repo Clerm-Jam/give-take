@@ -15,5 +15,5 @@ import { CommonModule } from '@angular/common';
 
 export class ChatComponent {
   title: string = "Chat";
-  chatting: boolean = false;
+  chatting: boolean = true;
 }

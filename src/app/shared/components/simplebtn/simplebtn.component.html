@@ -1,3 +1,3 @@
-<div class="border border-black w-fit">
-    <button class="bg-grey border-2 border-t-white border-l-white border-b-darkGrey border-r-darkGrey px-2 py-1">{{text}}</button>
+<div class="border border-black" [ngClass]="{'w-fit': !full, 'items-start': full}">
+    <button class="bg-grey border-2 border-t-white border-l-white border-b-darkGrey border-r-darkGrey px-2 py-1 w-full" (click)="action(parameters)">{{text}}</button>
 </div>
