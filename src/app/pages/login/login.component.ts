@@ -7,12 +7,12 @@ import { SimplebtnComponent } from '../../shared/components/simplebtn/simplebtn.
   standalone: true,
   imports: [WindowsComponent, SimplebtnComponent],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   onSelectUser = true;
   isHacker = false;
   winTitle = 'Login to work';
+  validPassword = false;
 
   users = [
     {
@@ -42,6 +42,17 @@ export class LoginComponent {
   handleinputChange(event: Event) {
     const input = event.target as HTMLInputElement;
     const passwordLength = input.value.length;
+    if (passwordLength > 0) {
+      this.validPassword = true;
+    } else {
+      this.validPassword = false;
+    }
     input.value = '*'.repeat(passwordLength);
+  }
+
+  nextPath() {
+    if (this.validPassword) {
+      
+    }
   }
 }
