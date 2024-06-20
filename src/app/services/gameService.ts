@@ -5,12 +5,14 @@ import { DAYS } from '../constants';
   providedIn: 'root',
 })
 export class GameService {
-  private gameState = signal<{ [key: string]: { logged_in: boolean } }>({
+  private gameState = signal<{ [key: string]: { logged_in: boolean, chatActive: boolean } }>({
     [DAYS.START]: {
       logged_in: true,
+      chatActive: false,
     },
     [DAYS.DAY_ONE]: {
-      logged_in: false,
+      logged_in: true,
+      chatActive: true
     },
   });
 
@@ -25,5 +27,23 @@ export class GameService {
 
   isLoggedIn(day: DAYS) {
     return this.gameState()[day].logged_in
+  }
+
+  isChatActive(day: DAYS) {
+    return this.gameState()[day].chatActive
+  }
+
+  openChat(day: DAYS) {
+    this.gameState.update((state) => {
+      state[day].chatActive = true
+      return state
+    })
+  }
+
+  closeChat(day: DAYS) {
+    this.gameState.update((state) => {
+      state[day].chatActive = false
+      return state
+    })
   }
 }

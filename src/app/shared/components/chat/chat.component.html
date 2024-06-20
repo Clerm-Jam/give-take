@@ -1,4 +1,4 @@
-<app-windows title="PingMe" size_classes="h-fit w-[250px]">
+<app-windows title="PingMe - {{getCurrentConversation().title}}" size_classes="h-fit w-[500px]" [close]="handleClose">
   <div *ngIf="chatting; else user_list">
     <app-chat-conversation [conversation]="getCurrentConversation()" />
   </div>

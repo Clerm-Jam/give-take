@@ -7,16 +7,21 @@ import { WallStreetMarqueeComponent } from '../wall-street-marquee/wall-street-m
 @Component({
   selector: 'app-window-manager',
   standalone: true,
-  inputs: ['windowPlacement', 'noPomodoro'],
+  inputs: ['windowPlacement', 'noPomodoro', 'chatActive'],
   imports: [CommonModule, PomodoroComponent, WallStreetMarqueeComponent],
-  templateUrl: './window-manager.component.html'
+  templateUrl: './window-manager.component.html',
 })
 export class WindowManagerComponent {
-  windowPlacement: WINDOW_PLACEMENT = WINDOW_PLACEMENT.NONE
-  noPomodoro: boolean = false
+  windowPlacement: WINDOW_PLACEMENT = WINDOW_PLACEMENT.NONE;
+  noPomodoro: boolean = false;
+  chatActive = true;
+
+  isChatActive() {
+    return this.chatActive;
+  }
 
   isCenterPlacement() {
-    return this.windowPlacement === WINDOW_PLACEMENT.CENTER; 
+    return this.windowPlacement === WINDOW_PLACEMENT.CENTER;
   }
 
   isBigLeftPlacement() {

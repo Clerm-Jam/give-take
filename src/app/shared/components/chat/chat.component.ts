@@ -10,6 +10,7 @@ import { UserDatabase } from '../../../models/userDatabase';
 
 import { MessageList } from '../../../models/messageList';
 import { DAYS } from '../../../constants';
+import { GameService } from '../../../services/gameService';
 
 @Component({
   selector: 'app-chat',
@@ -30,6 +31,7 @@ export class ChatComponent implements OnInit {
   private userService = inject(UserService);
   private chatService = inject(ChatService);
   private calendarService = inject(CalendarService);
+  private gameService = inject(GameService);
 
   users!: WritableSignal<UserDatabase>;
   today: DAYS = DAYS.DAY_ONE;
@@ -53,7 +55,9 @@ export class ChatComponent implements OnInit {
     return this.day_data.conversations;
   }
 
-  getCurrentConversation(){
+  getCurrentConversation() {
     return this.day_data.conversations[this.selected_chat];
   }
+
+  handleClose = () => this.gameService.closeChat(this.calendarService.getToday());
 }

@@ -1,18 +1,18 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { FunctionMap } from '../models/functionMap';
-import { MESSAGE_ACTIONS } from '../constants';
-
-@Injectable({
-  providedIn: 'root',
-})
+import { CODENAME, MESSAGE_ACTIONS } from '../constants';
+import { GameService } from './gameService';
+import { CalendarService } from './calendarService';
+import { ChatService } from './chatService';
 
 export class ActionsService {
+  gameService = inject(GameService)
+  calendarService = inject(CalendarService)
+  chatService = inject(ChatService)
+
   private actions: FunctionMap = {
     [MESSAGE_ACTIONS.ACTION_1_1]: () => {
-      alert('LALALALA');
-    },
-    [MESSAGE_ACTIONS.ACTION_1_2]: () => {
-      alert('LELELELE');
+      this.chatService.sendMessage(this.calendarService.getToday(), 0, 'OK.', CODENAME.ME)
     },
   };
 

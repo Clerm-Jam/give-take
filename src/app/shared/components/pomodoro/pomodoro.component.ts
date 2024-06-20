@@ -46,10 +46,6 @@ export class PomodoroComponent {
     return this.calendarService.dayStarted();
   }
 
-  startDay() {
-    this.calendarService.startDay();
-  }
-
   getProgress() {
     return Math.floor(this.getCurrentTime() / POMODORO_FACTOR);
   }

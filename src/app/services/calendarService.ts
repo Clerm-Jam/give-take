@@ -2,69 +2,72 @@ import { Injectable, signal } from '@angular/core';
 import { DAYS } from '../constants';
 import { Calendar } from '../models/calendar';
 
+const DEFAULT_CALENDAR = {
+  current_day: DAYS.DAY_ONE,
+  days: {
+    [DAYS.START]: {
+      name: 'Start',
+      current: 3600,
+      max: 3600,
+      day_started: false,
+    },
+    [DAYS.DAY_ONE]: {
+      name: 'Day One',
+      current: 100,
+      max: 100,
+      day_started: false,
+    },
+    [DAYS.DAY_TWO]: {
+      name: 'Day Two',
+      current: 100,
+      max: 100,
+      day_started: false,
+    },
+    [DAYS.DAY_THREE]: {
+      name: 'Day Three',
+      current: 100,
+      max: 100,
+      day_started: false,
+    },
+    [DAYS.DAY_FOUR]: {
+      name: 'Day Four',
+      current: 100,
+      max: 100,
+      day_started: false,
+    },
+    [DAYS.DAY_FIVE]: {
+      name: 'Day Five',
+      current: 100,
+      max: 100,
+      day_started: false,
+    },
+    [DAYS.DAY_SIX]: {
+      name: 'Day Six',
+      current: 100,
+      max: 100,
+      day_started: false,
+    },
+    [DAYS.DAY_SEVEN]: {
+      name: 'Day Seven',
+      current: 100,
+      max: 100,
+      day_started: false,
+    },
+    [DAYS.END]: {
+      name: 'End',
+      current: 3600,
+      max: 3600,
+      day_started: false,
+    },
+  },
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarService {
-  private calendar = signal<Calendar>({
-    current_day: DAYS.START,
-    days: {
-      [DAYS.START]: {
-        name: 'Start',
-        current: 3600,
-        max: 3600,
-        day_started: false,
-      },
-      [DAYS.DAY_ONE]: {
-        name: 'Day One',
-        current: 100,
-        max: 100,
-        day_started: false,
-      },
-      [DAYS.DAY_TWO]: {
-        name: 'Day Two',
-        current: 100,
-        max: 100,
-        day_started: false,
-      },
-      [DAYS.DAY_THREE]: {
-        name: 'Day Three',
-        current: 100,
-        max: 100,
-        day_started: false,
-      },
-      [DAYS.DAY_FOUR]: {
-        name: 'Day Four',
-        current: 100,
-        max: 100,
-        day_started: false,
-      },
-      [DAYS.DAY_FIVE]: {
-        name: 'Day Five',
-        current: 100,
-        max: 100,
-        day_started: false,
-      },
-      [DAYS.DAY_SIX]: {
-        name: 'Day Six',
-        current: 100,
-        max: 100,
-        day_started: false,
-      },
-      [DAYS.DAY_SEVEN]: {
-        name: 'Day Seven',
-        current: 100,
-        max: 100,
-        day_started: false,
-      },
-      [DAYS.END]: {
-        name: 'End',
-        current: 3600,
-        max: 3600,
-        day_started: false,
-      },
-    },
-  });
+  private calendar = signal<Calendar>(DEFAULT_CALENDAR);
 
   getToday() {
     return this.calendar().current_day;
