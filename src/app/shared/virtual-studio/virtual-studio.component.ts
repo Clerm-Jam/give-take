@@ -1,45 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { WindowsComponent } from '../components/windows/windows.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-virtual-studio',
   standalone: true,
-  imports: [WindowsComponent],
+  imports: [WindowsComponent, CommonModule],
   templateUrl: './virtual-studio.component.html',
+  styleUrls: ['./virtual-studio.component.css'] // Asegúrate de importar tu archivo CSS si lo usas
 })
-export class VirtualStudioComponent {
-  codeToWrite =
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint nihil quod delectus atque, modi voluptates, placeat rem labore omnis voluptate consequuntur facilis! Deserunt nesciunt enim ab ipsum iure modi a.';
+export class VirtualStudioComponent implements OnInit {
   stringLenght = 0;
   currentText = '';
-
-  previousLetter = '';
-  actualLetter = '';
-
+  codeToWrite = '';
+  previousLetters = '';
   errors = 0;
-
   combo = 0;
 
-  detectKey(event: KeyboardEvent) {
-    console.log('Previous ' + this.previousLetter);
+  @ViewChild('textContainer', { static: true }) textContainer!: ElementRef;
 
-    this.actualLetter = event.key;
-    console.log('actual ' + this.actualLetter);
-
-    if (this.previousLetter === this.actualLetter) {
-      this.errors++;
-      this.combo = 0;
+  async importText() {
+    const rest = await fetch('/assets/icons/code.txt');
+    if (!rest.ok) {
+      return;
     }
+    this.codeToWrite = await rest.text();
+  }
 
-    this.previousLetter = event.key;
+  ngOnInit() {
+    this.importText();
+  }
 
+  detectKey(event: KeyboardEvent) {
     if (
-      /[a-zA-Z]/.test(event.key) &&
+      /^[a-zA-Z0-9]$/.test(event.key) &&
       this.stringLenght < this.codeToWrite.length
     ) {
+      if (this.previousLetters.includes(event.key)) {
+        this.errors++;
+        this.combo = 0;
+      }
+      this.previousLetters = this.previousLetters.concat(event.key);
+      const letters = Array.from(this.previousLetters);
+      if (this.previousLetters.length > 4) {
+        letters.shift();
+        this.previousLetters = letters.join('');
+      }
+      console.log(this.previousLetters);
       this.currentText += this.codeToWrite.charAt(this.stringLenght);
       this.stringLenght++;
       this.combo++;
+
+      // Desplaza el scroll hacia el fondo
+      this.scrollToBottom();
+    }
+  }
+
+  scrollToBottom() {
+    try {
+      this.textContainer.nativeElement.scrollTop = this.textContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error('Error scrolling to bottom:', err);
     }
   }
 }
