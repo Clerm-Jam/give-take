@@ -1,0 +1,11 @@
+<app-windows [title]="'PerformanceTracker'" [size_classes]="'w-[470px]'">
+    @for (user of userInfos; track $index) {
+    <div class="flex justify-between my-4">
+        <span class="bg-yellow mr-4 h-9 w-10 grid place-items-center p-2">{{user.icon}}</span>
+        <div class="felx w-full">
+            <span class="self-start">{{user.name}}</span>
+        </div>
+        <span>user.points</span>
+    </div>
+    }
+</app-windows>

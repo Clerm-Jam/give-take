@@ -1,0 +1,5 @@
+<app-windows [title]="'ToDoApp'" size_classes="w-[600px]">
+    @for (todo of toDos; track todo; let i = $index) {
+        <li class="ml-5" [ngClass]="{'bg-ok': todo.completed}">{{todo.title}}</li>
+    }
+</app-windows>

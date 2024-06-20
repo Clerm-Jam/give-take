@@ -1,0 +1,14 @@
+<app-windows [title]="'Virtual studio'" size_classes="vscode w-[552px] relative">
+    <div class="h-96">{{ currentText }}</div>
+    <div class="absolute w-full left-0 bottom-8 h-7 bg-grey cursor-pointer" (keydown)="detectKey($event)" tabindex="0">
+        -> Click here and start write
+    </div>
+    <div class="w-full h-8 px-1 bg-blue absolute left-0 bottom-0 flex ali-center text-white">
+        <span>
+            Errors: {{ errors }}
+        </span>
+        <span class="text-ok mx-8">
+            Combo: x{{ combo }}
+        </span>
+    </div>
+</app-windows>
