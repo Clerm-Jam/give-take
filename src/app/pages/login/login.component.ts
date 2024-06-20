@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, WritableSignal, inject } from '@angular/core';
 import { WindowsComponent } from '../../shared/components/windows/windows.component';
 import { SimplebtnComponent } from '../../shared/components/simplebtn/simplebtn.component';
+import { UserService } from '../../services/userService';
+import { UserDatabase } from '../../models/userDatabase';
+import { UserInfo } from '../../models/userInfo';
 
 @Component({
   selector: 'app-login',
@@ -14,20 +17,15 @@ export class LoginComponent {
   winTitle = 'Login to work';
   validPassword = false;
 
-  users = [
-    {
-      image: '',
-      name: 'Juan',
-    },
-    {
-      image: '',
-      name: 'Player',
-    },
-    {
-      image: '',
-      name: 'Boss',
-    },
-  ];
+  private userService = inject(UserService);
+  users!: WritableSignal<UserDatabase>;
+
+  userInfos: UserInfo[] = [];
+
+  ngOnInit() {
+    this.users = this.userService.getUsers();
+    this.userInfos = Object.values(this.users()).map((element) => element.info);
+  }
 
   login(user: string) {
     this.onSelectUser = false;
@@ -52,7 +50,6 @@ export class LoginComponent {
 
   nextPath() {
     if (this.validPassword) {
-      
     }
   }
 }
