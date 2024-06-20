@@ -1,9 +1,9 @@
 import { UserInfo } from './models/userInfo';
 
-export const POMODORO_FACTOR = 10;
+export const POMODORO_FACTOR = 5;
 
 export const enum DAYS {
-  LOGIN = "LOGIN",
+  START = "START",
   DAY_ONE = 'day_one',
   DAY_TWO = 'day_two',
   DAY_THREE = 'day_three',

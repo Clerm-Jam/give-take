@@ -1,13 +1,14 @@
 import { Component, WritableSignal, inject } from '@angular/core';
-import { WindowsComponent } from '../../shared/components/windows/windows.component';
-import { SimplebtnComponent } from '../../shared/components/simplebtn/simplebtn.component';
-import { UserService } from '../../services/userService';
-import { UserDatabase } from '../../models/userDatabase';
-import { UserInfo } from '../../models/userInfo';
-import { WindowManagerComponent } from '../../shared/components/window-manager/window-manager.component';
-import { WINDOW_PLACEMENT } from '../../constants';
-import { CalendarService } from '../../services/calendarService';
+import { WindowsComponent } from '../windows/windows.component';
+import { SimplebtnComponent } from '../simplebtn/simplebtn.component';
+import { UserService } from '../../../services/userService';
+import { UserDatabase } from '../../../models/userDatabase';
+import { UserInfo } from '../../../models/userInfo';
+import { WindowManagerComponent } from '../window-manager/window-manager.component';
+import { WINDOW_PLACEMENT } from '../../../constants';
+import { CalendarService } from '../../../services/calendarService';
 import { Router } from '@angular/router';
+import { GameService } from '../../../services/gameService';
 
 @Component({
   selector: 'app-login',
@@ -23,13 +24,14 @@ export class LoginComponent {
 
   private userService = inject(UserService);
   private calendarService = inject(CalendarService);
+  private gameService = inject(GameService);
 
   users!: WritableSignal<UserDatabase>;
 
   userInfos: UserInfo[] = [];
 
   //injects the router for navigation
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.users = this.userService.getUsers();
@@ -61,8 +63,7 @@ export class LoginComponent {
 
   nextPath() {
     if (this.validPassword) {
-      this.calendarService.nextDay()
-      this.router.navigate([this.calendarService.getTodayRoute()])
+      this.gameService.logIn(this.calendarService.getToday());
     }
   }
 }

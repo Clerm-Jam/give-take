@@ -1,0 +1,10 @@
+<app-game-manager>
+  @switch (getCurrentDay()) {
+  @case (getStartDay()) {
+  <app-start-day></app-start-day>
+  }
+  @case (getDayOne()) {
+  <app-day-one></app-day-one>
+  }
+  }
+</app-game-manager>

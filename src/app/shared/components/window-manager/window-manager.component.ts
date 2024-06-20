@@ -7,12 +7,13 @@ import { WallStreetMarqueeComponent } from '../wall-street-marquee/wall-street-m
 @Component({
   selector: 'app-window-manager',
   standalone: true,
-  inputs: ['windowPlacement'],
+  inputs: ['windowPlacement', 'noPomodoro'],
   imports: [CommonModule, PomodoroComponent, WallStreetMarqueeComponent],
   templateUrl: './window-manager.component.html'
 })
 export class WindowManagerComponent {
   windowPlacement: WINDOW_PLACEMENT = WINDOW_PLACEMENT.NONE
+  noPomodoro: boolean = false
 
   isCenterPlacement() {
     return this.windowPlacement === WINDOW_PLACEMENT.CENTER; 

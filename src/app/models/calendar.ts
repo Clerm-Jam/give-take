@@ -5,7 +5,6 @@ export interface Calendar {
   days: {
     [key: string]: {
       name: string,
-      route: string,
       current: number,
       max: number,
       day_started: boolean,
