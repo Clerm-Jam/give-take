@@ -11,7 +11,7 @@ import { POMODORO_FACTOR } from '../../../constants';
   inputs: ['time'],
   templateUrl: './pomodoro.component.html',
 })
-export class PomodoroComponent implements OnInit {
+export class PomodoroComponent {
   private calendarService: CalendarService = inject(CalendarService);
 
   calendar!: WritableSignal<Calendar>;
@@ -20,15 +20,18 @@ export class PomodoroComponent implements OnInit {
       .fill(1)
       .keys()
   );
-  currentTime: number = 0;
-
-  ngOnInit(): void {
-    this.calendar = this.calendarService.getCalendar();
-    this.currentTime = this.calendarService.getCurrentTime();
-  }
+  tenDays = Array.from(
+    new Array(10)
+      .fill(1)
+      .map((el, idx) => idx)
+  )
 
   getCurrentTime() {
     return this.calendarService.getCurrentTime();
+  }
+
+  getMaxTime() {
+    return this.calendarService.getMaxTime();
   }
 
   getTodayName() {
@@ -47,7 +50,7 @@ export class PomodoroComponent implements OnInit {
     this.calendarService.startDay();
   }
 
-  getPomodoroFactor() {
-    return POMODORO_FACTOR;
+  getProgress() {
+    return Math.floor(this.getCurrentTime() / POMODORO_FACTOR);
   }
 }

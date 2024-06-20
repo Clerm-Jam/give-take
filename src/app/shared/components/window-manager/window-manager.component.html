@@ -1,6 +1,7 @@
 <div class="h-screen w-screen bg-green flex flex-col text-xl">
-  <div class="h-12 bg-black text-white">
-    <ng-content select="[pomodorobar]"></ng-content>
+  <div class="h-142 bg-black text-white flex w-full">
+    <app-wall-street-marquee *ngIf="!noPomodoro" class="w-full"></app-wall-street-marquee>
+    <app-pomodoro *ngIf="!noPomodoro" class="absolute right-0"></app-pomodoro>
   </div>
   <div *ngIf="isCenterPlacement()" class="px-24 flex justify-center items-center h-full">
     <ng-content select="[centerPanel]"></ng-content>

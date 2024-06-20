@@ -1,5 +1,5 @@
-<div class="flex gap-1 bg-grey p-2 border-2 border-t-white border-l-white border-b-darkGrey border-r-darkGrey">
-  <div class="text-xl mx-2">{{getTodayName()}}</div>
+<div class="flex gap-1 bg-grey p-2 border-2 border-t-white border-l-white border-b-darkGrey border-r-darkGrey w-[724px]">
+  <div class="text-xl mx-2 text-black">{{getTodayName()}}</div>
   <div *ngIf="!dayStarted(); else running">
     <div
         class="w-[600px] h-8 bg-ok text-black text-center text-2xl cursor-pointer hover:underline hover:text-yellow"
@@ -8,6 +8,14 @@
       </div>
   </div>
   <ng-template #running>
-    <div *ngFor="let step of steps" class="w-4 h-8" [ngClass]="{'bg-blue': step < getCurrentTime() / getPomodoroFactor() }"></div>
+    <div *ngFor="let step of steps">
+      @if (step <= this.getProgress() - 1) {
+        @if (step == this.getProgress() - 1) {
+          <div class="bg-error w-4 h-8 animate-blink"></div>
+        } @else {
+          <div class="bg-blue w-4 h-8"></div>
+        }
+      }
+    </div>
   </ng-template>
 </div>

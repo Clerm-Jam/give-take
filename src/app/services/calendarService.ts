@@ -1,74 +1,64 @@
 import { Injectable, signal } from '@angular/core';
 import { DAYS } from '../constants';
 import { Calendar } from '../models/calendar';
-import { Route, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarService {
   private calendar = signal<Calendar>({
-    current_day: DAYS.DAY_ONE,
+    current_day: DAYS.START,
     days: {
-      [DAYS.LOGIN]: {
-        name: 'Login',
-        route: '/',
+      [DAYS.START]: {
+        name: 'Start',
         current: 3600,
         max: 3600,
         day_started: false,
       },
       [DAYS.DAY_ONE]: {
         name: 'Day One',
-        route: '/dayOne',
-        current: 10,
+        current: 100,
         max: 100,
         day_started: false,
       },
       [DAYS.DAY_TWO]: {
         name: 'Day Two',
-        route: '/',
         current: 100,
         max: 100,
         day_started: false,
       },
       [DAYS.DAY_THREE]: {
         name: 'Day Three',
-        route: '/dayThree',
         current: 100,
         max: 100,
         day_started: false,
       },
       [DAYS.DAY_FOUR]: {
         name: 'Day Four',
-        route: '/dayFour',
         current: 100,
         max: 100,
         day_started: false,
       },
       [DAYS.DAY_FIVE]: {
         name: 'Day Five',
-        route: '/dayFive',
         current: 100,
         max: 100,
         day_started: false,
       },
       [DAYS.DAY_SIX]: {
         name: 'Day Six',
-        route: '/daySix',
         current: 100,
         max: 100,
         day_started: false,
       },
       [DAYS.DAY_SEVEN]: {
         name: 'Day Seven',
-        route: '/daySeven',
         current: 100,
         max: 100,
         day_started: false,
       },
       [DAYS.END]: {
         name: 'End',
-        route: '/End',
         current: 3600,
         max: 3600,
         day_started: false,
@@ -83,11 +73,6 @@ export class CalendarService {
   getTodayName() {
     const calendar: Calendar = this.calendar();
     return calendar.days[calendar.current_day].name;
-  }
-
-  getTodayRoute() {
-    const calendar: Calendar = this.calendar();
-    return calendar.days[calendar.current_day].route;
   }
 
   getCurrentTime(): number {
@@ -131,9 +116,9 @@ export class CalendarService {
 
   nextDay() {
     this.calendar.update((calendar) => {
-      let nextDay: DAYS = DAYS.LOGIN;
+      let nextDay: DAYS = DAYS.START;
       switch (calendar.current_day) {
-        case DAYS.LOGIN:
+        case DAYS.START:
           nextDay = DAYS.DAY_ONE;
           break;
         case DAYS.DAY_ONE:
@@ -158,7 +143,7 @@ export class CalendarService {
           nextDay = DAYS.END;
           break;
         case DAYS.END:
-          nextDay = DAYS.LOGIN;
+          nextDay = DAYS.START;
           break;
       }
       calendar.current_day = nextDay;

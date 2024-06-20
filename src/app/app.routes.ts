@@ -1,19 +1,12 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { DayOneComponent } from './pages/day-one/day-one.component';
+import { LoginComponent } from './shared/components/login/login.component';
+import { DayOneComponent } from './shared/components/day-one/day-one.component';
+import { GameComponent } from './pages/game/game.component';
 // import { SandboxComponent } from './pages/sandbox/sandbox.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
-  },
-  {
-    path: 'dayOne',
-    component: DayOneComponent,
+    component: GameComponent,
   }
-  // {
-  //   path: 'sandbox',
-  //   component: SandboxComponent,
-  // }
 ];
