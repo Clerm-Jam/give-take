@@ -1,1 +1,15 @@
-<p>nile.com works!</p>
+<app-windows title="Nile.com">
+  <div class="flex flex-col gap-2">
+    <div class="">
+      YOUR CREDIT CARD DETAILS:
+    </div>
+    <input class="border border-blue" (keypress)="numbers($event)" (blur)="cardHandler($event)"/>
+    @if(byeText) {
+      THANK YOU FOR YOUR MONEY
+    } @else {
+      <div class="">
+        <app-simplebtn text="BUY" [action]="buyHandler"></app-simplebtn>
+      </div>
+    }
+  </div>
+</app-windows>
