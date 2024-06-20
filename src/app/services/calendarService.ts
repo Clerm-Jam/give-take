@@ -3,7 +3,7 @@ import { DAYS } from '../constants';
 import { Calendar } from '../models/calendar';
 
 const DEFAULT_CALENDAR = {
-  current_day: DAYS.START,
+  current_day: DAYS.DAY_TWO,
   days: {
     [DAYS.START]: {
       name: 'Start',

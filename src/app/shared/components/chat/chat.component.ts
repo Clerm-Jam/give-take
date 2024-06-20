@@ -63,7 +63,8 @@ export class ChatComponent implements OnInit {
   }
 
   getTitle() {
-    return `PingMe ${ ' - ' + this.getCurrentConversation()?.title || ''}`
+    if(this.getCurrentConversation() == null) return 'PingMe'
+    return `PingMe - ${this.getCurrentConversation()?.title}`
   }
 
   handleClose = () => this.gameService.closeChat(this.calendarService.getToday());

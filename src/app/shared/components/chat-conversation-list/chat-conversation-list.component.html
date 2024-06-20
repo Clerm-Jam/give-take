@@ -3,5 +3,8 @@
     <div *ngFor="let convo of conversations; index as i">
       <app-conversation-title-card [conversation]="convo" [index]="i" [handler]="handler"></app-conversation-title-card>
     </div>
+    <div *ngIf="conversations.length == 0">
+      No one to chat with.
+    </div>
   </div>
 </div>
