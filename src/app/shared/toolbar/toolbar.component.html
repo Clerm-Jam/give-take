@@ -1,4 +1,6 @@
-<div class="flex justify-end p-2 bg-grey gap-2">
-    <span class="m-auto">Amazing Bank (c) 1997</span>
-    <app-simplebtn [text]="'Messages'" />
+<div class="h-16 bg-grey">
+    <div class="flex justify-end p-2 bg-grey gap-2">
+        <span class="m-auto">Amazing Bank (c) 1997</span>
+        <app-simplebtn (click)="handleMessagesClick()" [text]="'Messages'" />
+    </div>
 </div>

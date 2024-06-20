@@ -1,8 +1,10 @@
 <div class="flex flex-col gap-2">
+  <app-simplebtn [full]="true" text="↩ Back" [action]="handleBack"></app-simplebtn>
+  <div class="bg-grey w-full text-center "></div>
   <div *ngFor="let message of getFlatMessages()">
     <app-chat-message [message]="message" />
   </div>
   <div>
-    <app-chat-actions-panel [actions]="getActions()" />
+    <app-chat-actions-panel [actions]="getActions()" [convo]="getSelectedChat() || 0" />
   </div>
 </div>

@@ -69,6 +69,7 @@ export class LoginComponent {
   nextPath() {
     if (this.validPassword) {
       this.gameService.logIn(this.calendarService.getToday());
-    }
+      this.calendarService.startDay()
+     }
   }
 }

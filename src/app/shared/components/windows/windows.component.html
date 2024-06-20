@@ -3,7 +3,7 @@
         <div class="w-full text-center">
             <h2>{{ title }}</h2>
         </div>
-        <span
+        <span (click)="close()"
             class="hover:cursor-pointer bg-grey w-9 h-9 flex justify-center items-center text-black border-2 border-t-white border-l-white border-b-darkGrey border-r-darkGrey">
             <img [src]="closeIcon" alt="close" />
         </span>

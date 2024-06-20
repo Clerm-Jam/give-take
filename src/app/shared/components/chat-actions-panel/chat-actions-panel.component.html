@@ -1,7 +1,7 @@
 <div class="flex flex-col">
   <div class="flex flex-col">
     <div *ngFor="let action of actions" [ngClass]="'w-full'">
-      <app-simplebtn [text]="action.label" [action]="getActionFunction(action.action)" [full]="true"></app-simplebtn>
+      <app-simplebtn [text]="action.label" [action]="getActionFunction(action.action, convo)" [full]="true"></app-simplebtn>
     </div>
   </div>
 </div>

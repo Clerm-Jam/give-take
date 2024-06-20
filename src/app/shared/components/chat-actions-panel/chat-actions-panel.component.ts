@@ -9,16 +9,16 @@ import { ActionsService } from '../../../services/actionsService';
   selector: 'app-chat-actions-panel',
   standalone: true,
   imports: [SimplebtnComponent, CommonModule],
-  inputs: ['actions'],
+  inputs: ['actions', 'convo'],
   templateUrl: './chat-actions-panel.component.html',
-  styleUrl: './chat-actions-panel.component.css'
+  styleUrl: './chat-actions-panel.component.css',
 })
-
 export class ChatActionsPanelComponent {
   actions: MessageAction[] = [];
+  convo: number = 0;
   private actionsService = inject(ActionsService);
 
-  getActionFunction(code: MESSAGE_ACTIONS) {
-    return this.actionsService.getAction(code);
+  getActionFunction(code: MESSAGE_ACTIONS, convo: number) {
+    return () => this.actionsService.getAction(code)(convo);
   }
 }

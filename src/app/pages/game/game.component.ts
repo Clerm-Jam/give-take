@@ -5,11 +5,12 @@ import { DAYS } from '../../constants';
 import { CalendarService } from '../../services/calendarService';
 import { StartDayComponent } from '../../shared/components/start-day/start-day.component';
 import { GameManagerComponent } from '../../shared/components/game-manager/game-manager.component';
+import { DayTwoComponent } from '../../shared/components/day-two/day-two.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [StartDayComponent, DayOneComponent, GameManagerComponent],
+  imports: [StartDayComponent, DayOneComponent,  GameManagerComponent, DayTwoComponent],
   templateUrl: './game.component.html',
 })
 export class GameComponent {
