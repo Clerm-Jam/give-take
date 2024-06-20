@@ -4,11 +4,13 @@ import { SimplebtnComponent } from '../../shared/components/simplebtn/simplebtn.
 import { UserService } from '../../services/userService';
 import { UserDatabase } from '../../models/userDatabase';
 import { UserInfo } from '../../models/userInfo';
+import { WindowManagerComponent } from '../../shared/components/window-manager/window-manager.component';
+import { WINDOW_PLACEMENT } from '../../constants';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [WindowsComponent, SimplebtnComponent],
+  imports: [WindowsComponent, SimplebtnComponent, WindowManagerComponent],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
@@ -27,6 +29,8 @@ export class LoginComponent {
     this.userInfos = Object.values(this.users()).map((element) => element.info);
   }
 
+  windowPlacement = WINDOW_PLACEMENT.CENTER;
+  
   login(user: string) {
     this.onSelectUser = false;
     this.winTitle = 'Login as ' + user;

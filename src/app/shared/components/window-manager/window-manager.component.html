@@ -1,0 +1,32 @@
+<div class="h-screen w-screen bg-green flex flex-col text-xl">
+  <div class="h-12 bg-black text-white">
+    <ng-content select="[pomodorobar]"></ng-content>
+  </div>
+  <div *ngIf="isCenterPlacement()" class="px-24 flex justify-center items-center h-full">
+    <ng-content select="[centerPanel]"></ng-content>
+  </div>
+  <div *ngIf="isBigLeftPlacement()" class="flex flex-col justify-between h-full">
+    <div class="h-full grid grid-cols-5 px-24 py-12 gap-12">
+      <div class="col-span-3 flex items-center justify-center">
+        <ng-content select="[leftPanel]"></ng-content>
+      </div>
+      <div class="flex flex-col justify-around">
+        <ng-content select="[topRightPanel]"></ng-content>
+        <ng-content select="[bottomRightPanel]"></ng-content>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isFourCornersPlacement()" class="col-span-3 flex flex-col justify-between bg-debug">
+    <div>
+      <ng-content select="topLeftPanel"></ng-content>
+      <ng-content select="topRightPanel"></ng-content>
+    </div>
+    <div>
+      <ng-content select="bottomLeftPanel"></ng-content>
+      <ng-content select="bottonRightPanel"></ng-content>
+    </div>
+  </div>
+  <div class="h-16 bg-grey">
+    <ng-content select="[toolbar]"></ng-content>
+  </div>
+</div>

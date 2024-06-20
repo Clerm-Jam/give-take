@@ -14,6 +14,13 @@ export const enum DAYS {
   END = "END",
 }
 
+export const enum WINDOW_PLACEMENT {
+  CENTER = "center",
+  BIG_LEFT = "single_left",
+  FOUR_CORNERS = "four_corners",
+  NONE = "none"
+}
+
 export const enum CODENAME {
   ME = 'me',
   JUAN = 'juan',
