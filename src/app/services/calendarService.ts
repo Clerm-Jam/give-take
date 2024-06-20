@@ -20,7 +20,7 @@ export class CalendarService {
       [DAYS.DAY_ONE]: {
         name: 'Day One',
         route: '/dayOne',
-        current: 10,
+        current: 100,
         max: 100,
         day_started: false,
       },

@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { WINDOW_PLACEMENT } from '../../../constants';
+import { PomodoroComponent } from '../pomodoro/pomodoro.component';
+import { WallStreetMarqueeComponent } from '../wall-street-marquee/wall-street-marquee.component';
 
 @Component({
   selector: 'app-window-manager',
   standalone: true,
   inputs: ['windowPlacement'],
-  imports: [CommonModule],
+  imports: [CommonModule, PomodoroComponent, WallStreetMarqueeComponent],
   templateUrl: './window-manager.component.html'
 })
 export class WindowManagerComponent {
