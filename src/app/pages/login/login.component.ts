@@ -62,7 +62,7 @@ export class LoginComponent {
   nextPath() {
     if (this.validPassword) {
       this.calendarService.nextDay()
-      this.calendarService.startDay(this.router)
+      this.router.navigate([this.calendarService.getTodayRoute()])
     }
   }
 }
