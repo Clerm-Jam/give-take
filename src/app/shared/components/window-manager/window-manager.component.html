@@ -16,14 +16,14 @@
       </div>
     </div>
   </div>
-  <div *ngIf="isFourCornersPlacement()" class="col-span-3 flex flex-col justify-between bg-debug">
-    <div>
-      <ng-content select="topLeftPanel"></ng-content>
-      <ng-content select="topRightPanel"></ng-content>
+  <div *ngIf="isFourCornersPlacement()" class="flex justify-around h-full bg-debug">
+    <div class="flex flex-col gap-8 justify-center">
+      <ng-content select="[topLeftCorner]"></ng-content>
+      <ng-content select="[bottomLeftCorner]"></ng-content>
     </div>
-    <div>
-      <ng-content select="bottomLeftPanel"></ng-content>
-      <ng-content select="bottonRightPanel"></ng-content>
+    <div class="flex flex-col gap-8 justify-center">
+      <ng-content select="[topRightCorner]"></ng-content>
+      <ng-content select="[bottomRightCorner]"></ng-content>
     </div>
   </div>
   <div class="h-16 bg-grey">
