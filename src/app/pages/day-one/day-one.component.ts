@@ -31,6 +31,10 @@ export class DayOneComponent {
     this.actualLetter = event.key;
     console.log('actual ' + this.actualLetter)
 
+    if (this.previousLetter === this.actualLetter) {
+      this.errors++
+    }
+
     this.previousLetter = event.key;
 
     if (
