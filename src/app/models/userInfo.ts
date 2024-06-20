@@ -1,6 +1,6 @@
-import { CODENAME } from "../constants";
+import { CODENAME } from '../constants';
 
 export interface UserInfo {
-  name: string,
-  icon: string
+  name: string;
+  icon: string;
 }

@@ -30,6 +30,8 @@ export class LoginComponent {
 
   userInfos: UserInfo[] = [];
 
+  validUser = false;
+
   //injects the router for navigation
   constructor(private router: Router) {}
 
@@ -43,6 +45,9 @@ export class LoginComponent {
   login(user: string) {
     this.onSelectUser = false;
     this.winTitle = 'Login as ' + user;
+    if (user === 'Genius') {
+      this.validUser = true;
+    }
   }
 
   goBack() {
@@ -53,7 +58,7 @@ export class LoginComponent {
   handleinputChange(event: Event) {
     const input = event.target as HTMLInputElement;
     const passwordLength = input.value.length;
-    if (passwordLength > 0) {
+    if (passwordLength > 4 && this.validUser) {
       this.validPassword = true;
     } else {
       this.validPassword = false;

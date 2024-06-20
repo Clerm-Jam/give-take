@@ -38,19 +38,19 @@ interface UserInfoList {
 export const USERS: UserInfoList = {
   [CODENAME.ME]: {
     name: 'Genius',
-    icon: ':3',
+    icon: '/assets/profilePics/mepic.svg',
   },
   [CODENAME.JUAN]: {
     name: 'Juan',
-    icon: '=)',
+    icon: '/assets/profilePics/juanpic.svg',
   },
   [CODENAME.BOSS]: {
     name: 'TheBoss',
-    icon: ':<',
+    icon: '/assets/profilePics/bosspic.svg',
   },
   [CODENAME.HACKER]: {
     name: 'DarkestMystery22',
-    icon: 'B)',
+    icon: '/assets/profilePics/darkmpic.svg',
   },
 };
 

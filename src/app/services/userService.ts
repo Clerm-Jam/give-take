@@ -12,13 +12,15 @@ export class UserService {
       status: {
         online: true,
         hidden: false,
+        points: 0,
       }
     },
     [CODENAME.BOSS]: {
       info: USERS[CODENAME.BOSS],
       status: {
-        online: true,
+        online: false,
         hidden: false,
+        points: 9999,
       }
     },
     [CODENAME.JUAN]: {
@@ -26,6 +28,7 @@ export class UserService {
       status: {
         online: true,
         hidden: false,
+        points: 450,
       },
     },
     [CODENAME.HACKER]: {
@@ -33,6 +36,7 @@ export class UserService {
       status: {
         online: false,
         hidden: true,
+        points: 100,
       },
     },
   });
