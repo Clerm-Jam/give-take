@@ -1,0 +1,17 @@
+<div class="h-[52px] animate-marquee flex items-center">
+  <div class="flex gap-4">
+    @for (idx of [1,2]; track $index) {
+    @for (stock of stocks; track $index) {
+    <div class="flex gap-2">
+      <div>{{stock.symbol}}</div>
+      <div [class.text-ok]="stock.gain > 0" [class.text-error]="stock.gain < 0" [class.text-white]="stock.gain == 0">
+        {{stock.gain}}
+      </div>
+      <div *ngIf="stock.gain > 0" class="text-ok">▲</div>
+      <div *ngIf="stock.gain < 0" class="text-error">▼</div>
+      <div *ngIf="stock.gain == 0" class="text-white">-</div>
+    </div>
+    }
+    }
+  </div>
+</div>
