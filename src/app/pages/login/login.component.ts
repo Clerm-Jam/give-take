@@ -6,6 +6,8 @@ import { UserDatabase } from '../../models/userDatabase';
 import { UserInfo } from '../../models/userInfo';
 import { WindowManagerComponent } from '../../shared/components/window-manager/window-manager.component';
 import { WINDOW_PLACEMENT } from '../../constants';
+import { CalendarService } from '../../services/calendarService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,9 +22,14 @@ export class LoginComponent {
   validPassword = false;
 
   private userService = inject(UserService);
+  private calendarService = inject(CalendarService);
+
   users!: WritableSignal<UserDatabase>;
 
   userInfos: UserInfo[] = [];
+
+  //injects the router for navigation
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.users = this.userService.getUsers();
@@ -30,7 +37,7 @@ export class LoginComponent {
   }
 
   windowPlacement = WINDOW_PLACEMENT.CENTER;
-  
+
   login(user: string) {
     this.onSelectUser = false;
     this.winTitle = 'Login as ' + user;
@@ -54,6 +61,8 @@ export class LoginComponent {
 
   nextPath() {
     if (this.validPassword) {
+      this.calendarService.nextDay()
+      this.calendarService.startDay(this.router)
     }
   }
 }
