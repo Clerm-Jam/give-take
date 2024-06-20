@@ -9,10 +9,11 @@ import { FlatMessage } from '../../../models/flatMessage';
   selector: 'app-chat-message',
   standalone: true,
   imports: [SimplebtnComponent, CommonModule],
-  inputs: ['message'],
+  inputs: ['message', 'typing'],
   templateUrl: './chat-message.component.html',
   styleUrl: './chat-message.component.css'
 })
 export class ChatMessageComponent {
+  typing: boolean = false
   message: FlatMessage = { content: "", from_name: "", from_icon: "", me: false};
 }

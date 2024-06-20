@@ -57,5 +57,6 @@ export const USERS: UserInfoList = {
 export const enum MESSAGE_ACTIONS {
   ACTION_1_1,
   ACTION_1_2,
+  ACTION_1_3,
   DO_NOTHING
 }

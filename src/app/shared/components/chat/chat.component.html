@@ -1,8 +1,8 @@
-<app-windows title="PingMe - {{getCurrentConversation().title}}" size_classes="h-fit w-[500px]" [close]="handleClose">
-  <div *ngIf="chatting; else user_list">
-    <app-chat-conversation [conversation]="getCurrentConversation()" />
+<app-windows [title]="getTitle()" size_classes="h-fit w-[500px]" [close]="handleClose">
+  <div *ngIf="getChatting(); else convo_list">
+    <app-chat-conversation />
   </div>
-  <ng-template #user_list>
-    <app-chat-user-list [onlineUsers]="getOnlineUsersInfo()"/>
+  <ng-template #convo_list>
+    <app-chat-conversation-list [conversations]="getConversations()" [handler]="switchToConversation" />
   </ng-template>
 </app-windows>

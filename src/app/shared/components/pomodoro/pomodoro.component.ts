@@ -20,11 +20,6 @@ export class PomodoroComponent {
       .fill(1)
       .keys()
   );
-  tenDays = Array.from(
-    new Array(10)
-      .fill(1)
-      .map((el, idx) => idx)
-  )
 
   getCurrentTime() {
     return this.calendarService.getCurrentTime();

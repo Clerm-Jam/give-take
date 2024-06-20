@@ -5,6 +5,9 @@ import { CODENAME, DAYS, MESSAGE_ACTIONS } from '../constants';
 const DEFAULT_CHAT_CONTENT = {
   [DAYS.DAY_ONE]: {
     active_users: [CODENAME.BOSS, CODENAME.JUAN],
+    selected: 0,
+    chatting: false,
+    typing: false,
     conversations: [
       {
         title: 'Groupchat',
@@ -26,7 +29,7 @@ const DEFAULT_CHAT_CONTENT = {
           {
             label: 'OK.',
             action: MESSAGE_ACTIONS.ACTION_1_1,
-          }
+          },
         ],
       },
       {
@@ -37,16 +40,31 @@ const DEFAULT_CHAT_CONTENT = {
             from: CODENAME.JUAN,
           },
         ],
-        actions: [],
+        actions: [
+          {
+            label: 'Working hard!',
+            action: MESSAGE_ACTIONS.ACTION_1_2,
+          },
+          {
+            label: '<Ingore him>',
+            action: MESSAGE_ACTIONS.ACTION_1_3,
+          },
+        ],
       },
     ],
   },
   [DAYS.DAY_TWO]: {
     active_users: [CODENAME.JUAN],
+    selected: null,
+    chatting: false,
+    typing: false,
     conversations: [],
   },
   [DAYS.DAY_THREE]: {
     active_users: [CODENAME.JUAN],
+    selected: 0,
+    chatting: false,
+    typing: false,
     conversations: [
       {
         title: 'Private chat with Juan',
@@ -62,6 +80,9 @@ const DEFAULT_CHAT_CONTENT = {
   },
   [DAYS.DAY_FOUR]: {
     active_users: [CODENAME.JUAN],
+    selected: 0,
+    chatting: false,
+    typing: false,
     conversations: [
       {
         title: 'Private chat with Juan',
@@ -78,6 +99,9 @@ const DEFAULT_CHAT_CONTENT = {
   },
   [DAYS.DAY_FIVE]: {
     active_users: [CODENAME.HACKER],
+    selected: 0,
+    chatting: false,
+    typing: false,
     conversations: [
       {
         title: '???????',
@@ -103,12 +127,15 @@ const DEFAULT_CHAT_CONTENT = {
             from: CODENAME.HACKER,
           },
         ],
-        actions: []
+        actions: [],
       },
     ],
   },
   [DAYS.DAY_SIX]: {
     active_users: [CODENAME.BOSS, CODENAME.JUAN, CODENAME.HACKER],
+    selected: 0,
+    chatting: false,
+    typing: false,
     conversations: [
       {
         title: 'Private chat with TheBoss',
@@ -123,12 +150,12 @@ const DEFAULT_CHAT_CONTENT = {
             from: CODENAME.ME,
           },
         ],
-        actions: []
+        actions: [],
       },
       {
         title: 'Private chat with Juan',
         messages: [],
-        actions: []
+        actions: [],
       },
       {
         title: 'REMEBER',
@@ -142,12 +169,15 @@ const DEFAULT_CHAT_CONTENT = {
             from: CODENAME.HACKER,
           },
         ],
-        actions: []
+        actions: [],
       },
     ],
   },
   [DAYS.DAY_SEVEN]: {
     active_users: [CODENAME.BOSS, CODENAME.JUAN, CODENAME.HACKER],
+    selected: 0,
+    chatting: false,
+    typing: false,
     conversations: [
       {
         title: 'Groupchat',
@@ -157,10 +187,15 @@ const DEFAULT_CHAT_CONTENT = {
             from: CODENAME.BOSS,
           },
         ],
-        actions: []
+        actions: [],
       },
     ],
   },
+};
+
+async function wait(delay: number, callback: Function) {
+  await new Promise((resolve) => setTimeout(resolve, delay));
+  callback()
 }
 
 @Injectable({
@@ -169,17 +204,74 @@ const DEFAULT_CHAT_CONTENT = {
 export class ChatService {
   private chatContent = signal<ChatContent>(DEFAULT_CHAT_CONTENT);
 
+  async setTyping(day: DAYS, delay: number) {
+    this.chatContent.update((state) => {
+      state[day].typing = true;
+      return state;
+    });
+    await wait(delay, () => {
+      this.chatContent.update((state) => {
+        state[day].typing = false;
+        return state;
+      });
+    });
+  }
+
+  getTyping(day: DAYS) {
+    return this.chatContent()[day].typing;
+  }
+
   getDay(day: DAYS) {
     return this.chatContent()[day];
   }
 
-  sendMessage(day: DAYS, conversation: number, message: string, from: CODENAME) {
+  getConversation(day: DAYS, index: number) {
+    return this.chatContent()[day].conversations[index];
+  }
+
+  getCurrentConversation(day: DAYS) {
+    const selectedChat = this.getSelectedChat(day);
+    if (selectedChat != null) {
+      return this.chatContent()[day].conversations[selectedChat];
+    } else {
+      return null;
+    }
+  }
+
+  sendMessage(
+    day: DAYS,
+    conversation: number,
+    message: string,
+    from: CODENAME
+  ) {
     this.chatContent.update((state) => {
       state[day].conversations[conversation].messages.push({
         content: message,
         from: from,
       });
-      state[day].conversations[conversation].actions = []
+      state[day].conversations[conversation].actions = [];
+      return state;
+    });
+  }
+
+  getSelectedChat(day: DAYS) {
+    return this.chatContent()[day].selected;
+  }
+
+  selectChat(day: DAYS, index: number) {
+    this.chatContent.update((state) => {
+      state[day].selected = index;
+      return state;
+    });
+  }
+
+  getChatting(day: DAYS) {
+    return this.chatContent()[day].chatting;
+  }
+
+  setChatting(day: DAYS, chatting: boolean) {
+    this.chatContent.update((state) => {
+      state[day].chatting = chatting;
       return state;
     });
   }
