@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { WindowsComponent } from '../../shared/components/windows/windows.component';
 import { SimplebtnComponent } from '../../shared/components/simplebtn/simplebtn.component';
+import { WindowManagerComponent } from '../../shared/components/window-manager/window-manager.component';
+import { WINDOW_PLACEMENT } from '../../constants';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [WindowsComponent, SimplebtnComponent],
+  imports: [WindowsComponent, SimplebtnComponent, WindowManagerComponent],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
@@ -13,7 +15,7 @@ export class LoginComponent {
   isHacker = false;
   winTitle = 'Login to work';
   validPassword = false;
-
+  windowPlacement = WINDOW_PLACEMENT.CENTER;
   users = [
     {
       image: '',

@@ -1,27 +1,30 @@
-<div class="w-full h-full bg-green flex items-center justify-center">
-    <app-windows [title]="winTitle" class="flex">
-        @if (onSelectUser) {
+<app-window-manager [windowPlacement]="windowPlacement">
+    <div centerPanel>
+        <app-windows [title]="winTitle" class="flex" scale="scale-150">
+            @if (onSelectUser) {
             @for (user of users; track $index) {
-                <div class="mb-2 h-12 px-2 w-96 bg-grey flex justify-between items-center group">
-                    <span>{{user.name}}</span>
-                    <app-simplebtn (click)="login(user.name)" [text]="'Login'" class="hidden group-hover:flex"/>
-                </div>
+            <div class="mb-2 h-12 px-2 w-96 bg-grey flex justify-between items-center group">
+                <span>{{user.name}}</span>
+                <app-simplebtn (click)="login(user.name)" [text]="'Login'" class="hidden group-hover:flex" />
+            </div>
             }
-        @if (isHacker) {
+            @if (isHacker) {
             <div class="mb-2 h-12 px-2 w-96 bg-grey flex justify-between items-center group">
                 <span>Hacker</span>
-                <app-simplebtn [text]="'Login'" class="hidden group-hover:flex"/>
+                <app-simplebtn [text]="'Login'" class="hidden group-hover:flex" />
             </div>
-        } 
-        }
-        @if (!onSelectUser) {
-                <span>Pasword:</span>
-                <br class="mb-2">
-                <div class="flex mb-20">
-                    <input class="bg-grey py-1 px-1 w-full focus:outline-none" type="text" (input)="handleinputChange($event)">
-                    <app-simplebtn (click)="nextPath()" [text]="'Login'" />
-                </div>
-                <app-simplebtn (click)="goBack()" [text]="'Go back'" />
             }
-    </app-windows>
-</div>
+            }
+            @if (!onSelectUser) {
+            <span>Pasword:</span>
+            <br class="mb-2">
+            <div class="flex mb-20">
+                <input class="bg-grey py-1 px-1 w-full focus:outline-none" type="text"
+                    (input)="handleinputChange($event)">
+                <app-simplebtn (click)="nextPath()" [text]="'Login'" />
+            </div>
+            <app-simplebtn (click)="goBack()" [text]="'Go back'" />
+            }
+        </app-windows>
+    </div>
+</app-window-manager>
