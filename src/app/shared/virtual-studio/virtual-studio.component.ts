@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, inject } from '@angular/core';
 import { WindowsComponent } from '../components/windows/windows.component';
 import { CommonModule } from '@angular/common';
+import { GameService } from '../../services/gameService';
+import { CalendarService } from '../../services/calendarService';
+import { TodoService } from '../../services/todoService';
 
 @Component({
   selector: 'app-virtual-studio',
@@ -10,6 +13,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./virtual-studio.component.css'] // Asegúrate de importar tu archivo CSS si lo usas
 })
 export class VirtualStudioComponent implements OnInit {
+  calendarService = inject(CalendarService);
+  todoAppService = inject(TodoService)
+
   stringLenght = 0;
   currentText = '';
   codeToWrite = '';
@@ -42,7 +48,7 @@ export class VirtualStudioComponent implements OnInit {
       }
       this.previousLetters = this.previousLetters.concat(event.key);
       const letters = Array.from(this.previousLetters);
-      if (this.previousLetters.length > 4) {
+      if (this.previousLetters.length > 3) {
         letters.shift();
         this.previousLetters = letters.join('');
       }
@@ -50,6 +56,9 @@ export class VirtualStudioComponent implements OnInit {
       this.currentText += this.codeToWrite.charAt(this.stringLenght);
       this.stringLenght++;
       this.combo++;
+      if(this.combo == 15) {
+        this.todoAppService.complete(this.calendarService.getToday(), 0)
+      }
 
       // Desplaza el scroll hacia el fondo
       this.scrollToBottom();

@@ -1,10 +1,27 @@
+@if (timeOver()) {
+<div class="h-screen w-screen bg-blue text-white text-center p-24">
+  <div class="text-4xl">
+    TIME OVER
+  </div>
+  <div class="text-2xl">
+    @if(allCompleted()) {
+      <div class="bg-ok"> CONGRATULATIONS! YOU ARE THE BEST PROGRAMMER </div>
+    } @else {
+      <div class="bg-error"> CONGRATULATIONS (?) YOU ARE NOW A CUSTOMER! </div>
+    }
+  </div>
+  <div class="underline text-2xl" (click)="advance()"> demo level 2 </div>
+</div>
+} @else {
 @if (!isLoggedIn()) {
 <app-login></app-login>
 } @else {
 <div class="relative">
   <ng-content></ng-content>
-  <div *ngIf="isChatActive()" class="text-xl flex justify-center items-center bg-black bg-opacity-80 h-screen w-screen absolute top-0 left-0">
+  <div *ngIf="isChatActive()"
+    class="text-xl flex justify-center items-center bg-black bg-opacity-80 h-screen w-screen absolute top-0 left-0">
     <app-chat></app-chat>
   </div>
 </div>
+}
 }

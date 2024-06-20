@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { WindowsComponent } from '../components/windows/windows.component';
+import { TodoService } from '../../services/todoService';
+import { CalendarService } from '../../services/calendarService';
 
 @Component({
   selector: 'app-todo-app',
@@ -10,13 +12,10 @@ import { WindowsComponent } from '../components/windows/windows.component';
   styleUrl: './todo-app.component.css',
 })
 export class TodoAppComponent {
-  toDos = [
-    {title: 'Completar la nueva feature con menos de 5 errores',
-      completed: false,
-    },
-    {
-      title: 'Sabotear o ayudar a Juan',
-      completed: false,
-    }
-  ]
+  todoAppService = inject(TodoService)
+  calendarService = inject(CalendarService)
+
+  getTodos() { 
+    return this.todoAppService.getTodo(this.calendarService.getToday())
+  }
 }

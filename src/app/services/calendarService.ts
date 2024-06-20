@@ -3,7 +3,7 @@ import { DAYS } from '../constants';
 import { Calendar } from '../models/calendar';
 
 const DEFAULT_CALENDAR = {
-  current_day: DAYS.DAY_TWO,
+  current_day: DAYS.START,
   days: {
     [DAYS.START]: {
       name: 'Start',
@@ -13,8 +13,8 @@ const DEFAULT_CALENDAR = {
     },
     [DAYS.DAY_ONE]: {
       name: 'Day One',
-      current: 30,
-      max: 30,
+      current: 100,
+      max: 100,
       day_started: false,
     },
     [DAYS.DAY_TWO]: {
@@ -114,7 +114,6 @@ export class CalendarService {
       this.tick();
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-    this.nextDay();
   }
 
   nextDay() {
