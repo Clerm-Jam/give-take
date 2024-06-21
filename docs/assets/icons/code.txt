@@ -1,0 +1,145 @@
+function printGroupArrayMenu() {
+    groups.forEach((group) => {
+      const conteiner = document.querySelector("#groupConteiner");
+      const selectElement = document.querySelector("#GroupSelect");
+      conteiner.innerHTML = "";
+      selectElement.innerHTML = "";
+      //Esta es la forma de imprimir para la ventana de la carta
+      //y llenar el elemento select
+      groups.forEach((group) => {
+        //Primero imprimimos en el DOM el listado de grupos
+        const newGroup = document.createElement("div");
+        const groupContent = document.createElement("div");
+        const delGroup = document.createElement("button");
+        const btnIco3 = document.createElement("ion-icon");
+        btnIco3.setAttribute("name", "trash-outline");
+        newGroup.classList.add("listElement");
+        newGroup.classList.add("group");
+        newGroup.classList.add("background");
+        newGroup.textContent = group.name + ":";
+        newGroup.appendChild(groupContent);
+        newGroup.appendChild(delGroup);
+        conteiner.appendChild(newGroup);
+        delGroup.append(btnIco3);
+        //Segundo añadimos una opcion a nuestro select por cada grupo que creamos
+        const option = document.createElement("option");
+        option.value = group.name;
+        option.text = group.name;
+        selectElement.appendChild(option);
+        //Funcionalidad para eliminar grupos
+        delGroup.addEventListener("click", function () {
+          // Encontrar el índice del grupo en el array
+          const index = groups.findIndex((g) => g.name === group.name);
+          if (index !== -1) {
+            // Si se encontró el grupo, eliminarlo del array
+            groups.splice(index, 1);
+            // Eliminar el elemento del DOM
+            conteiner.removeChild(newGroup);
+            // Guardar los cambios en el almacenamiento
+            saveData("groups", groups);
+            // Actualizar el select
+          }
+        });
+        //Ahora se procede a agregarle los items a cada grupo
+        group.products.forEach((product) => {
+          const newProduct = document.createElement("div");
+          if (!product.available) {
+            newProduct.classList.add("unaviliable");
+          }
+          newProduct.classList.add("listElement");
+          newProduct.classList.add("groupElement");
+          newProduct.id = product.name;
+          const p1 = document.createElement("p");
+          const p1_5 = document.createElement("p");
+          const p2 = document.createElement("p");
+          const groupBtn = document.createElement("div");
+          const groupBtn2 = document.createElement("div");
+          const btnIco = document.createElement("ion-icon");
+          const btnIco2 = document.createElement("ion-icon");
+          const checkBox = document.createElement("ion-icon");
+          btnIco.setAttribute("name", "trash-outline");
+          btnIco2.setAttribute("name", "create-outline");
+          checkBox.setAttribute("name", "close-circle-outline");
+          groupBtn.appendChild(btnIco);
+          groupBtn2.appendChild(btnIco2);
+          p1.textContent = product.name;
+          if (product.cost > 0) {
+            p1_5.textContent = "$" + product.cost;
+          } else {
+            p1_5.textContent = "";
+          }
+          p2.textContent = "$" + product.price;
+          newProduct.appendChild(p1);
+          newProduct.appendChild(p1_5);
+          newProduct.appendChild(p2);
+          newProduct.appendChild(groupBtn);
+          newProduct.appendChild(groupBtn2);
+          newProduct.appendChild(checkBox);
+          groupContent.appendChild(newProduct);
+          //Funcionalidad de el boton de borrar producto
+          btnIco.addEventListener("click", function () {
+            groupContent.removeChild(newProduct);
+            const prodToRemove = groups
+              .flatMap((group) => group.products)
+              .find((product) => p1.textContent === product.name);
+            // Filtra el array groups para excluir el objeto prodToRemove
+            groups.forEach((group) => {
+              group.products = group.products.filter(
+                (product) => product !== prodToRemove
+              );
+            });
+
+            saveData("groups", groups);
+          });
+          //Funcionalidad del boton de editar producto y añadirle ingredientes (ahora se despliega un ventana para hacerlo)
+          btnIco2.addEventListener("click", function () {
+            const window = document.querySelector("#editProductSlct");
+            openCloseWindows(window);
+            // Filtra el array groups para excluir el objeto prodToRemove
+            const prodToEdit = groups
+              .flatMap((group) => group.products)
+              .find((product) => p1.textContent === product.name);
+            selectedProd = prodToEdit;
+
+            //Ahora se renderizan los datos en los inputs de edicion
+            const nameInput = document.querySelector("#prodNameToEdit");
+            const priceInput = document.querySelector("#prodPriceToEdit");
+            const costInput = document.querySelector("#prodCostToEdit");
+
+            nameInput.value = selectedProd.name;
+            priceInput.value = selectedProd.price;
+            costInput.value = selectedProd.cost;
+
+            document
+              .querySelector("#apllyNewData")
+              .addEventListener("click", function () {
+                document
+                  .querySelector("#editProductSlct")
+                  .classList.add("hide");
+
+                selectedProd.name = nameInput.value;
+                selectedProd.price = priceInput.value;
+                selectedProd.cost = costInput.value;
+                printGroupArrayMenu();
+                nameInput.value = "";
+                priceInput.value = "";
+                selectedProd = null;
+                saveData("groups", groups);
+              });
+          });
+          checkBox.addEventListener("click", function () {
+            const productsHtml = document.querySelectorAll(".groupElement");
+            const productsArray = Array.from(productsHtml);
+
+            const prodToChange = productsArray.find(
+              (productHtml) => productHtml.id === product.name
+            );
+            prodToChange.classList.toggle("unaviliable");
+            groupTodEdit = product.available = !product.available;
+            saveData("groups", groups);
+            console.log(groups);
+          });
+        });
+      });
+    });
+  }
